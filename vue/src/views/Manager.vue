@@ -50,6 +50,7 @@
               <i class="el-icon-menu"></i><span>用户管理</span>
             </template>
             <el-menu-item index="/admin">管理员信息</el-menu-item>
+            <el-menu-item index="/user">用户信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -72,7 +73,7 @@ export default {
     }
   },
   created() {
-    if (!this.user.id) {
+    if (!this.user.id||this.user.role!=='ADMIN') {
       this.$router.push('/login')
     }
   },
