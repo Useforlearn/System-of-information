@@ -29,7 +29,7 @@
                   <div style="display: flex; align-items: center">
                     <div style="flex: 1"></div>
                     <div style="flex: 1; text-align: right">
-                      已有账号？请 <a href="/register">登录</a>
+                      已有账号？请 <el-button type="text" style="color: #2a60c9" @click="goBack">登录</el-button>
                     </div>
                   </div>
         </el-form>
@@ -72,6 +72,9 @@ export default {
 
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     register() {
       this.$refs['formRef'].validate((valid) => {
         if (valid) {

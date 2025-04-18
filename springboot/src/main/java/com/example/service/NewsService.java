@@ -75,4 +75,7 @@ public class NewsService {
         return PageInfo.of(list);
     }
 
+    public List<News> selectTopNews(String sort) {
+        return newsMapper.selectTopNews(sort);
+    }
 }

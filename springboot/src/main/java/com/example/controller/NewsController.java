@@ -83,5 +83,9 @@ public class NewsController {
         PageInfo<News> page = newsService.selectPage(news, pageNum, pageSize);
         return Result.success(page);
     }
-
+    @GetMapping("/selectTopNews")
+    public Result selectPage(@RequestParam String sort) {
+        List<News> list = newsService.selectTopNews(sort);
+        return Result.success(list);
+    }
 }

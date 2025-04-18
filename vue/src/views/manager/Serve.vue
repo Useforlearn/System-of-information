@@ -187,7 +187,7 @@ export default {
       this.load(pageNum)
     },
     handleCoverSuccess(res){
-      this.form.cover = res.date;
+      this.form.cover = res.data;
     }
   }
 }

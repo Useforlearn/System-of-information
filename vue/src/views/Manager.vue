@@ -42,7 +42,14 @@
             <template slot="title">
               <i class="el-icon-menu"></i><span>信息管理</span>
             </template>
+            <el-menu-item index="/category">资讯分类</el-menu-item>
+            <el-menu-item index="/news">资讯信息</el-menu-item>
+            <el-menu-item index="/activity">公益活动</el-menu-item>
+            <el-menu-item index="/serve">养老服务</el-menu-item>
+            <el-menu-item index="/nurseHouse">养老院信息</el-menu-item>
             <el-menu-item index="/notice">公告信息</el-menu-item>
+
+
           </el-submenu>
 
           <el-submenu index="user">

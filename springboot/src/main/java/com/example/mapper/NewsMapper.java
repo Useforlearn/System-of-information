@@ -34,4 +34,5 @@ public interface NewsMapper {
     */
     List<News> selectAll(News news);
 
+    List<News> selectTopNews(String sort);
 }

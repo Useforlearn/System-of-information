@@ -270,7 +270,7 @@ export default {
       this.load(pageNum)
     },
     handleCoverSuccess(res){
-      this.form.cover = res.date;
+      this.form.img = res.data;
     },
     setRichText(html) {
       this.$nextTick(() => {

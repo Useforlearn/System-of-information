@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="background-color: #f6f6f6;">
     <div class="front-notice"><i class="el-icon-bell" style="margin-right: 2px"></i>公告：{{ top }}</div>
     <!--头部-->
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.png" alt="">
-        <div class="title">项目前台</div>
+        <div class="title">社区健康服务管理系统</div>
       </div>
       <div class="front-header-center">
         <div class="front-header-nav">
@@ -41,15 +41,18 @@
     <div class="main-body">
       <router-view ref="child" @update:user="updateUser" />
     </div>
+
+    <Footer />
   </div>
 
 </template>
 
 <script>
 
+import  Footer from "@/components/Footer";
 export default {
   name: "FrontLayout",
-
+ components:{Footer},
   data () {
     return {
       top: '',
