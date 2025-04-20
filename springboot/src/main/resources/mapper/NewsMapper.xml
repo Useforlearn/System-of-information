@@ -16,6 +16,7 @@
             <if test="id != null"> and id= #{id}</if>
             <if test="title != null"> and title like concat('%', #{title}, '%')</if>
             <if test="content != null"> and content= #{content}</if>
+            <if test="category != null"> and category=#{category}</if>
             <if test="time != null"> and time= #{time}</if>
         </where>
         order by id desc
@@ -27,7 +28,16 @@
         from news
         where id = #{id}
     </select>
+    <select id="selectTopNews" resultType="com.example.entity.News">
+        select
+        <include refid="Base_Column_List" />
+        from news
+        order by
+        <if test="sort == 'new'"> id </if>
+        <if test="sort == 'hot'"> count</if>
 
+        desc
+    </select>
     <delete id="deleteById">
         delete from news
         where  id = #{id}
