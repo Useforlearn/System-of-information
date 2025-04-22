@@ -38,6 +38,15 @@ public class CommentController {
     }
 
     /**
+     * 递归删除
+     */
+    @DeleteMapping("/deepDelete/{id}")
+    public Result deepDelete(@PathVariable Integer id) {
+        commentService.deepDelete(id);
+        return Result.success();
+    }
+
+    /**
      * 批量删除
      */
     @DeleteMapping("/delete/batch")
@@ -92,4 +101,12 @@ public class CommentController {
         List<Comment> list = commentService.selectTree(fid, module);
         return Result.success(list);
     }
+    /*
+    * 查询评论数
+    * */
+    @GetMapping("/selectCount/{fid}/{module}")
+    public Result selectCount(@PathVariable Integer fid, @PathVariable String module) {
+        Integer count = commentService.selectCount(fid, module);
+        return Result.success(count);
+}
 }
