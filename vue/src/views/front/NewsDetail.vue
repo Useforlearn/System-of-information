@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" style="width: 60%">
     <div class="card">
       <div style="margin-bottom: 20px; font-size: 22px; font-weight: bold; text-align: center">{{news.title }}</div>
       <div style="color: #666; text-align: center">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Comment from "@/components/Comment.vue"
+import Comment from "@/components/Comment"
 export default {
   name: "NewsDetail",
   components: {Comment},

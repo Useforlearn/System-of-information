@@ -98,8 +98,8 @@ export default {
       this.$set(comment, 'showReply',  !comment.showReply)
     },
     addComment(pComment) {
-      this.form.module = 'news'
-      this.form.fid =this.id
+      this.form.module = this.module
+      this.form.fid =this.fid
       this.form.userId = this.user.id
       if(pComment) {
         this.form.pid = pComment.id
