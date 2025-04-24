@@ -68,7 +68,9 @@
     width: 70%;
     margin: 10px auto;
 }
-
+.main-body {
+    min-height: calc(100vh - 216px);
+}
 /* ElementUI 样式覆盖 */
 .el-menu.el-menu--horizontal {
     border: none !important;

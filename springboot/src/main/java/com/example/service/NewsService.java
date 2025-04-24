@@ -78,4 +78,8 @@ public class NewsService {
     public List<News> selectTopNews(String sort) {
         return newsMapper.selectTopNews(sort);
     }
+
+    public void updateCount(Integer id) {
+        newsMapper.updateCount(id);
+    }
 }

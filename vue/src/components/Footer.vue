@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 30px 0; text-align: center; line-height: 30px">
-    <div>社区养老系统 客服电话 666-78787878</div>
+    <div>社区养老系统 客服电话 010-55669988</div>
   </div>
 </template>
 
