@@ -29,6 +29,8 @@ const routes = [
       { path: 'serve', name: 'Serve', meta: { name: '养老服务' + '' }, component: () => import('../views/manager/Serve') },
       { path: 'nurseHouse', name: 'NurseHouse', meta: { name: '养老院信息' }, component: () => import('../views/manager/NurseHouse') },
       { path: 'comment', name: 'Comment', meta: { name: '评论信息' }, component: () => import('../views/manager/Comment') },
+      { path: 'activitySign', name: 'ActivitySign', meta: { name: '活动报名' }, component: () => import('../views/manager/ActivitySign') },
+      { path: 'reserve', name: 'Reserve', meta: { name: '服务预约' }, component: () => import('../views/manager/Reserve') },
     ]
   },
   {
@@ -36,10 +38,16 @@ const routes = [
     name: 'Front',
     component: () => import('../views/Front.vue'),
     children: [
-      { path: 'home', name: 'Home', meta: { name: '系统首页' }, component: () => import('../views/front/Home') },
-      { path: 'person', name: 'Person', meta: { name: '个人信息' }, component: () => import('../views/front/Person') },
-      { path: 'newsDetail', name: 'NewsDetail', component: () => import('../views/front/NewsDetail') },
-      { path: 'activityDetail', name: 'ActivityDetail', component: () => import('../views/front/ActivityDetail') },
+      { path: 'home', name: 'FHome', meta: { name: '系统首页' }, component: () => import('../views/front/Home') },
+      { path: 'person', name: 'FPerson', meta: { name: '个人信息' }, component: () => import('../views/front/Person') },
+      { path: 'newsDetail', name: 'FNewsDetail', component: () => import('../views/front/NewsDetail') },
+      { path: 'activityDetail', name: 'FActivityDetail', component: () => import('../views/front/ActivityDetail') },
+      { path: 'activity', name: 'FActivity', component: () => import('../views/front/Activity') },
+      { path: 'activitySign', name: 'FActivitySign', component: () => import('../views/front/ActivitySign') },
+      { path: 'serve', name: 'FServe', component: () => import('../views/front/Serve') },
+      { path: 'reserve', name: 'FReserve', component: () => import('../views/front/Reserve') },
+      { path: 'nurseHouse', name: 'FNurseHouse', component: () => import('../views/front/NurseHouse') },
+      { path: 'houseDetail', name: 'HouseDetail', component: () => import('../views/front/HouseDetail') },
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },

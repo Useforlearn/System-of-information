@@ -11,6 +11,9 @@
         <div class="front-header-nav">
           <el-menu :default-active="$route.path" mode="horizontal" router>
 						<el-menu-item index="/front/home">首页</el-menu-item>
+						<el-menu-item index="/front/activity">公益活动</el-menu-item>
+						<el-menu-item index="/front/serve">养老服务</el-menu-item>
+						<el-menu-item index="/front/nurseHouse">养老院</el-menu-item>
 						<el-menu-item index="/front/person">个人中心</el-menu-item>
           </el-menu>
         </div>
@@ -30,7 +33,13 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <div style="text-decoration: none" @click="logout">退出</div>
+                <div  @click="$router.push('/front/activitySign')">我报名的活动</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div  @click="$router.push('/front/reserve')">我预约的服务</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div  @click="logout">退出登录</div>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
