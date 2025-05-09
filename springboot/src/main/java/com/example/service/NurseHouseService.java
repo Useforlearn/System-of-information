@@ -70,4 +70,7 @@ public class NurseHouseService {
         return PageInfo.of(list);
     }
 
+    public void updateCount(Integer id) {
+        nurseHouseMapper.updateCount(id);
+    }
 }

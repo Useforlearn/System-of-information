@@ -60,7 +60,10 @@ export default {
     }
   },
   created() {
-    this.load()
+    this.$request.put('nurseHouse/updateCount/' + this.id).then(res => {
+      this.load()
+
+    })
   },
   methods: {
     load() {

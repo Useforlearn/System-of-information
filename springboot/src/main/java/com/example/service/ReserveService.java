@@ -1,6 +1,8 @@
 package com.example.service;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.Dict;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Reserve;
@@ -11,6 +13,8 @@ import com.github.pagehelper.PageInfo;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 服务预约业务处理
@@ -79,4 +83,17 @@ public class ReserveService {
         return PageInfo.of(list);
     }
 
+    public List<Dict> selectCount() {
+        List<Reserve> reserveList = reserveMapper.selectAll(null);
+        reserveList = reserveList.stream().filter(reserve -> "审核通过".equals(reserve.getStatus())
+                || "待审核".equals(reserve.getStatus())).collect(Collectors.toList());
+        Set<String> set = reserveList.stream().map(Reserve::getServeName).collect(Collectors.toSet());
+        List<Dict> list = CollUtil.newArrayList();
+        for (String name : set) {
+            long count = reserveList.stream().filter(reserve -> reserve.getServeName().equals(name)).count();
+            Dict dict = Dict.create().set("name", name).set("value", count);
+            list.add(dict);
+        }
+        return list;
+    }
 }

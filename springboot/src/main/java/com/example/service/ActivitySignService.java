@@ -1,6 +1,8 @@
 package com.example.service;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.Dict;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
@@ -13,6 +15,8 @@ import com.github.pagehelper.PageInfo;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 活动报名业务处理
@@ -88,5 +92,19 @@ public class ActivitySignService {
 
     public ActivitySign selectByActivityIdAndUserId(Integer activityId, Integer userId) {
         return activitySignMapper.selectByActivityIdAndUserId(activityId,userId);
+    }
+
+    public List<Dict> selectCount() {
+        List<ActivitySign> activitySigns = activitySignMapper.selectAll(null);
+        activitySigns = activitySigns.stream().filter(activitySign -> "审核通过".equals(activitySign.getStatus())
+                || "待审核".equals(activitySign.getStatus())).collect(Collectors.toList());
+        Set<String> set = activitySigns.stream().map(ActivitySign::getActivityName).collect(Collectors.toSet());
+        List<Dict> list = CollUtil.newArrayList();
+        for (String name : set) {
+            long count = activitySigns.stream().filter(activitySign -> activitySign.getActivityName().equals(name)).count();
+            Dict dict = Dict.create().set("name", name).set("value", count);
+            list.add(dict);
+        }
+        return list;
     }
 }
