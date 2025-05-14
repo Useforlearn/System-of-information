@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MedicalExamMapper">
+
+    <sql id="Base_Column_List">
+        id, name, cover, descr, start, end, content, address, status
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.MedicalExam">
+        select
+        <include refid="Base_Column_List" />
+        from medical_exam
+        <where>
+            <if test="name != null"> and name like concat('%', #{name}, '%')</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.MedicalExam">
+        select
+        <include refid="Base_Column_List" />
+        from medical_exam
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from medical_exam
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.MedicalExam" useGeneratedKeys="true" keyProperty="id">
+        insert into medical_exam
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="cover != null">cover,</if>
+            <if test="descr != null">descr,</if>
+            <if test="start != null">start,</if>
+            <if test="end != null">end,</if>
+            <if test="content != null">content,</if>
+            <if test="address != null">address,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="cover != null">#{cover},</if>
+            <if test="descr != null">#{descr},</if>
+            <if test="start != null">#{start},</if>
+            <if test="end != null">#{end},</if>
+            <if test="content != null">#{content},</if>
+            <if test="address != null">#{address},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.MedicalExam">
+        update medical_exam
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="cover != null">
+                cover = #{cover},
+            </if>
+            <if test="descr != null">
+                descr = #{descr},
+            </if>
+            <if test="start != null">
+                start = #{start},
+            </if>
+            <if test="end != null">
+                end = #{end},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+</mapper>
