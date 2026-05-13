@@ -23,6 +23,15 @@ const routes = [
       { path: 'password', name: 'Password', meta: { name: '修改密码' }, component: () => import('../views/manager/Password') },
       { path: 'notice', name: 'Notice', meta: { name: '公告信息' }, component: () => import('../views/manager/Notice') },
       { path: 'user', name: 'User', meta: { name: '用户信息' }, component: () => import('../views/manager/User') },
+      { path: 'category', name: 'Category', meta: { name: '资讯分类' }, component: () => import('../views/manager/Category') },
+      { path: 'news', name: 'News', meta: { name: '资讯信息' +
+              '' }, component: () => import('../views/manager/News') },
+      { path: 'activity', name: 'Activity', meta: { name: '公益活动' +
+              '' }, component: () => import('../views/manager/Activity') },
+      { path: 'serve', name: 'Serve', meta: { name: '养老服务' +
+              '' }, component: () => import('../views/manager/Serve') },
+      { path: 'nurseHouse', name: 'NurseHouse', meta: { name: '养老院信息' }, component: () => import('../views/manager/NurseHouse') },
+
     ]
   },
   {
