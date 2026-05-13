@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "node-polyfill-webpack-plugin": "^4.1.0",
+    "url": "^0.11.4",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "wangeditor": "^4.7.15"
+  }
+}
