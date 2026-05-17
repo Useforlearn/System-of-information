@@ -1,5 +1,6 @@
 package com.example.service;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import com.example.entity.Account;
 import com.example.entity.Comment;
@@ -27,14 +28,40 @@ public class CommentService {
      */
     public void add(Comment comment) {
         comment.setTime(DateUtil.now());
+        if(comment.getPid()!=null){
+            Comment pComment=this.selectById(comment.getPid());
+            if(pComment == null){
+                return;
+            }
+            if(pComment.getRootId()!=null){
+                comment.setRootId(pComment.getRootId());
+            }
+            else {
+                comment.setRootId(pComment.getId());
+            }
+        }
         commentMapper.insert(comment);
     }
 
     /**
-     * 删除
+     * 后台删除
      */
     public void deleteById(Integer id) {
         commentMapper.deleteById(id);
+    }
+
+    /*
+    * 前台递归的删除
+    * */
+    public void deepDelete(Integer pid) {
+        commentMapper.deleteById(pid);
+        List<Comment> children = commentMapper.selectByPid(pid);
+        if(CollUtil.isNotEmpty(children)){
+            for (Comment comment : children) {
+                pid = comment.getId();
+                this.deepDelete(pid);
+            }
+        }
     }
 
     /**
@@ -86,5 +113,9 @@ public class CommentService {
             root.setChildren(children);
         }
         return rootList;
+    }
+
+    public Integer selectCount(Integer fid, String module) {
+        return commentMapper.selectCount(fid,module);
     }
 }

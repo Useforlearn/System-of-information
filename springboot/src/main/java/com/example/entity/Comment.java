@@ -30,6 +30,16 @@ public class Comment implements Serializable {
 
     private List<Comment> children;
 
+    private String replyUser;
+
+    public void setReplyUser(String replyUser) {
+        this.replyUser = replyUser;
+    }
+
+    public String getReplyUser() {
+        return replyUser;
+    }
+
     public Integer getId() {
         return id;
     }
