@@ -29,7 +29,7 @@
                   <div style="display: flex; align-items: center">
                     <div style="flex: 1"></div>
                     <div style="flex: 1; text-align: right">
-                      已有账号？请 <el-button type="text" style="color: #2a60c9" @click="goBack">登录</el-button>
+                      已有账号？<a href="/login">登录</a>
                     </div>
                   </div>
         </el-form>

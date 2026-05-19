@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #f6f6f6;">
+  <div style="background-color: #f6f6f6; min-height: 100vh">
     <div class="front-notice"><i class="el-icon-bell" style="margin-right: 2px"></i>公告：{{ top }}</div>
     <!--头部-->
     <div class="front-header">
@@ -11,6 +11,7 @@
         <div class="front-header-nav">
           <el-menu :default-active="$route.path" mode="horizontal" router>
 						<el-menu-item index="/front/home">首页</el-menu-item>
+						<el-menu-item index="/front/activity">公益活动</el-menu-item>
 						<el-menu-item index="/front/person">个人中心</el-menu-item>
           </el-menu>
         </div>
@@ -25,12 +26,15 @@
             <div class="front-header-dropdown">
               <img :src="user.avatar" alt="">
               <div style="margin-left: 10px">
-                <span>{{ user.name }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
+                <span>{{ user.username }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
               </div>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <div style="text-decoration: none" @click="logout">退出</div>
+                <div  @click="$router.push('/front/activitySign')">我报名的活动</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div  @click="logout">退出登录</div>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>

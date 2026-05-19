@@ -18,7 +18,7 @@
         <el-dropdown placement="bottom">
           <div class="avatar">
             <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" />
-            <div>{{ user.name ||  '管理员' }}</div>
+            <div>{{ user.username ||  '管理员' }}</div>
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="goToPerson">个人信息</el-dropdown-item>
@@ -47,9 +47,9 @@
             <el-menu-item index="/activity">公益活动</el-menu-item>
             <el-menu-item index="/serve">养老服务</el-menu-item>
             <el-menu-item index="/nurseHouse">养老院信息</el-menu-item>
+            <el-menu-item index="/comment">评论信息</el-menu-item>
+            <el-menu-item index="/activitySign">活动报名</el-menu-item>
             <el-menu-item index="/notice">公告信息</el-menu-item>
-
-
           </el-submenu>
 
           <el-submenu index="user">

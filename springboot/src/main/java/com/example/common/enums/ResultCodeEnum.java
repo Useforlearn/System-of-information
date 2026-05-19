@@ -8,12 +8,13 @@ public enum ResultCodeEnum {
     TOKEN_CHECK_ERROR("401", "token验证失败，请重新登录"),
     PARAM_LOST_ERROR("4001", "参数缺失"),
 
-    SYSTEM_ERROR("500", "系统异常"),
+    SYSTEM_ERROR("500", "系统异常123"),
     USER_EXIST_ERROR("5001", "用户名已存在"),
     USER_NOT_LOGIN("5002", "用户未登录"),
     USER_ACCOUNT_ERROR("5003", "账号或密码错误"),
     USER_NOT_EXIST_ERROR("5004", "用户不存在"),
     PARAM_PASSWORD_ERROR("5005", "原密码输入错误"),
+    SIGN_ERROR("5005", "已报名过该活动"),
     ;
 
     public String code;
