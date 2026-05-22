@@ -48,6 +48,8 @@
             <el-menu-item index="/serve">养老服务</el-menu-item>
             <el-menu-item index="/nurseHouse">养老院信息</el-menu-item>
             <el-menu-item index="/comment">评论信息</el-menu-item>
+            <el-menu-item index="/activitySign">活动报名</el-menu-item>
+            <el-menu-item index="/reserve">服务预约</el-menu-item>
             <el-menu-item index="/notice">公告信息</el-menu-item>
           </el-submenu>
 
