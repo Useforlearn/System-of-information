@@ -1,6 +1,12 @@
 package com.example.entity;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Dict;
+
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 服务预约
@@ -88,4 +94,6 @@ public class Reserve implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+
 }

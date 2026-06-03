@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import cn.hutool.core.lang.Dict;
 import com.example.common.Result;
 import com.example.entity.Reserve;
 import com.example.service.ReserveService;
@@ -83,4 +84,9 @@ public class ReserveController {
         return Result.success(page);
     }
 
+    @GetMapping("/selectCount")
+    public Result selectCount() {
+        List<Dict> list = reserveService.selectCount();
+        return Result.success(list);
+    }
 }

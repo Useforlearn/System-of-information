@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import cn.hutool.core.lang.Dict;
 import com.example.common.Result;
 import com.example.entity.ActivitySign;
 import com.example.service.ActivitySignService;
@@ -83,4 +84,9 @@ public class ActivitySignController {
         return Result.success(page);
     }
 
+    @GetMapping("/selectCount")
+    public Result selectCount() {
+       List<Dict> list = activitySignService.selectCount();
+        return Result.success(list);
+    }
 }
