@@ -9,10 +9,10 @@
           <div class="item"><span style="color: #333">活动日期：</span>{{ activity.start }} ~ {{ activity.end }}</div>
           <div class="item"><span style="color: #333">活动地址：</span>{{ activity.address }}</div>
           <div>
-            <el-button size="medium" type="primary" v-if="activity.status === '未报名'" >开始报名</el-button>
-            <el-button size="medium" type="primary" v-if="activity.status === '已报名'" disabled >已报名</el-button>
-            <el-button size="medium" type="primary" v-if="activity.status === '未开始'" disabled >活动未开始</el-button>
-            <el-button size="medium" type="primary" v-if="activity.status === '已结束'" disabled >活动已结束</el-button>
+            <el-button @click="handleSign" size="medium" type="primary" v-if="activity.status === '未报名'" >开始报名</el-button>
+            <el-button size="medium" type="primary" v-if="activity.status === '已报名'" disabled key ="sign">已报名</el-button>
+            <el-button size="medium" type="primary" v-if="activity.status === '未开始'" disabled key="notstart" >活动未开始</el-button>
+            <el-button size="medium" type="primary" v-if="activity.status === '已结束'" disabled key="notend">活动已结束</el-button>
           </div>
         </div>
       </div>
@@ -28,6 +28,18 @@
 
     <Comment :fid ="id" module ="activity" />
 
+    <el-dialog userName="报名信息" :visible.sync="formVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+      <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
+        <el-form-item prop="phone" label="手机号">
+          <el-input  v-model="form.phone" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="formVisible = false">取 消</el-button>
+        <el-button type="primary" @click="sign">报 名</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -39,17 +51,41 @@ export default {
   data() {
     return {
       id: this.$route.query.id,
-      activity: {}
+      activity: {},
+      formVisible: false,
+      form:{},
+      user:JSON.parse(localStorage.getItem('xm-user'||'{}')),
+      rules:{
+        phone:[
+          {required : true , message:'手机号必填', trigger:'blur' }
+        ]
+      }
     }
   },
   created() {
     this.load()
   },
   methods: {
+    sign(){
+      this.$request.post('activitySign/add',this.form).then(res=>{
+        if(res.code  === '200'){
+          this.$message.success('报名成功')
+          this.formVisible=false
+          this.load()
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+    handleSign(){
+      this.form={}
+      this.form.userId = this.user.id
+      this.form.activityId = this.id
+      this.formVisible=true
+    },
     load() {
       this.$request.get('/activity/selectById/' + this.id).then(res => {
         this.activity = res.data || {}
-        this.activity.status = '未开始'  // 先默认一个数据测试一下
       })
     }
   }

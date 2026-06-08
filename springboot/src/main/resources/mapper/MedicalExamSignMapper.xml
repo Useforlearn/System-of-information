@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MedicalExamSignMapper">
+
+    <sql id="Base_Column_List">
+        id,exam_item_id,phone,date,user_id,status,reason
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.MedicalExamSign">
+        select
+        medical_exam_sign.*, user.name as userName, medical_exam.name as examItemName
+        from medical_exam_sign
+        left join user
+        on medical_exam_sign.user_id = user.id
+        left join medical_exam
+        on medical_exam_sign.exam_item_id = medical_exam.id
+        <where>
+            <if test="userId != null"> and  medical_exam_sign.user_id = #{userId}</if>
+            <if test="userName != null"> and user.name like concat('%', #{userName}, '%')</if>
+        </where>
+        order by medical_exam_sign.id desc
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.MedicalExamSign">
+        select
+        <include refid="Base_Column_List" />
+        from medical_exam_sign
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from medical_exam_sign
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.MedicalExamSign" useGeneratedKeys="true" keyProperty="id">
+        insert into medical_exam_sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="examItemId != null">exam_item_id,</if>
+            <if test="phone != null">phone,</if>
+            <if test="date != null">date,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="status != null">status,</if>
+            <if test="reason != null">reason,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="examItemId != null">#{examItemId},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="date != null">#{date},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reason != null">#{reason},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.MedicalExamSign">
+        update medical_exam_sign
+        <set>
+            <if test="examItemId != null">
+                exam_item_id = #{examItemId},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="reason != null">
+                reason = #{reason},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

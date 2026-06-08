@@ -6,6 +6,8 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
+    "schema-utils": "^4.3.2",
+    "semver": "^7.7.2",
     "wangeditor": "^4.7.15"
   }
 }

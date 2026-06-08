@@ -1,6 +1,8 @@
 package com.example.mapper;
 
 import com.example.entity.NurseHouse;
+import org.apache.ibatis.annotations.Update;
+
 import java.util.List;
 
 /**
@@ -33,4 +35,6 @@ public interface NurseHouseMapper {
      */
     List<NurseHouse> selectAll(NurseHouse nurseHouse);
 
+    @Update("update nurse_house set count = count + 1 where id = #{id}")
+    void updateCount(Integer id);
 }

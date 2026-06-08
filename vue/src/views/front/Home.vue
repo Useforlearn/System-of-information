@@ -1,7 +1,7 @@
 <template>
   <div style="min-height: calc(100vh - 86px);">
     <div style="width: 70%; margin: 10px auto">
-      <!--      上面的区域-->
+      <!-- 轮播图区域 -->
       <div style="display: flex; grid-gap: 10px">
         <div style="flex: 1">
           <el-carousel height="300px">
@@ -11,10 +11,11 @@
           </el-carousel>
         </div>
 
+        <!-- 资讯展示区域 -->
         <div style="flex: 1">
           <div style="display: flex; border-bottom: 1px solid #ddd; margin-bottom: 20px">
-            <div @click="loadTopNews('new')" class="top-news" :class="{ 'top-active' : sort === 'new' }">最新资讯</div>
-            <div @click="loadTopNews('hot')" class="top-news" :class="{ 'top-active' : sort === 'hot' }">最热资讯</div>
+            <div @click="loadTopNews('new')" class="top-news" :class="{ 'top-active': sort === 'new' }">最新资讯</div>
+            <div @click="loadTopNews('hot')" class="top-news" :class="{ 'top-active': sort === 'hot' }">最热资讯</div>
           </div>
 
           <div style="padding: 0 10px">
@@ -24,16 +25,14 @@
             </div>
           </div>
         </div>
-
       </div>
 
-      <!--      下面的区域-->
+      <!-- 资讯分类及列表区域 -->
       <div style="margin: 30px 0; display: flex; grid-gap: 20px; min-height: 400px">
-        <!--        左边区域-->
         <div style="flex: 1">
           <div style="display: flex; margin-bottom: 10px;">
-            <div @click="loadCategoryNews(null)" class="category-item" :class="{ 'category-active' : category === null }">全部</div>
-            <div @click="loadCategoryNews(item.name)" class="category-item" :class="{ 'category-active' : item.name === category }" v-for="item in categoryList" :key="item.id">{{ item.name }}</div>
+            <div @click="loadCategoryNews(null)" class="category-item" :class="{ 'category-active': category === null }">全部</div>
+            <div @click="loadCategoryNews(item.name)" class="category-item" :class="{ 'category-active': item.name === category }" v-for="item in categoryList" :key="item.id">{{ item.name }}</div>
           </div>
           <div>
             <div @click="$router.push('/front/newsDetail?id=' + item.id)" v-for="item in tableData" :key="item.id" class="card" style="display: flex; margin-bottom: 10px; cursor: pointer;">
@@ -60,10 +59,10 @@
           </div>
         </div>
 
-        <!--        右边区域-->
+        <!-- 活动展示区域 -->
         <div style="width: 260px">
           <div style="margin-bottom: 10px; display: flex; align-items: center">
-            <div style="flex: 1; font-size: 24px; ">公益活动</div>
+            <div style="flex: 1; font-size: 24px;">公益活动</div>
             <a href="/front/activity">更多>></a>
           </div>
           <div class="card">
@@ -77,22 +76,19 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
-
   data() {
     return {
       imgs: [
         require('@/assets/imgs/carousel/1.png'),
         require('@/assets/imgs/carousel/2.png'),
       ],
-      sort: 'new',  // hot
+      sort: 'new',
       topNews: [],
       categoryList: [],
       category: null,
@@ -109,16 +105,16 @@ export default {
     this.loadCategoryNews(null)
     this.loadActivity()
   },
-  // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
-    loadActivity() {
-      this.$request.get('/activity/selectPage', {
-        params: {
-          pageNum: 1,
-          pageSize: 6
-        }
-      }).then(res => {
-        this.activityList = res.data?.list || []
+    loadTopNews(sort) {
+      this.sort = sort
+      this.$request.get('/news/selectTopNews?sort=' + this.sort).then(res => {
+        this.topNews = res.data || []
+      })
+    },
+    loadCategory() {
+      this.$request.get('/category/selectAll').then(res => {
+        this.categoryList = res.data || []
       })
     },
     loadCategoryNews(category) {
@@ -138,15 +134,14 @@ export default {
       this.pageNum = pageNum
       this.loadCategoryNews(this.category)
     },
-    loadCategory() {
-      this.$request.get('/category/selectAll').then(res => {
-        this.categoryList = res.data || []
-      })
-    },
-    loadTopNews(sort) {
-      this.sort = sort
-      this.$request.get('/news/selectTopNews?sort=' + this.sort).then(res => {
-        this.topNews = res.data || []
+    loadActivity() {
+      this.$request.get('/activity/selectPage', {
+        params: {
+          pageNum: 1,
+          pageSize: 6
+        }
+      }).then(res => {
+        this.activityList = res.data?.list || []
       })
     }
   }
