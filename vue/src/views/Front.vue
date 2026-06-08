@@ -15,6 +15,7 @@
 						<el-menu-item index="/front/serve">养老服务</el-menu-item>
 						<el-menu-item index="/front/nurseHouse">养老院</el-menu-item>
 						<el-menu-item index="/front/person">个人中心</el-menu-item>
+            <el-menu-item index="/front/medicalExam">体检项目</el-menu-item>
           </el-menu>
         </div>
       </div>
@@ -37,6 +38,9 @@
               </el-dropdown-item>
               <el-dropdown-item>
                 <div  @click="$router.push('/front/reserve')">我预约的服务</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/medicalExamSign')">我预约的体检</div>
               </el-dropdown-item>
               <el-dropdown-item>
                 <div  @click="logout">退出登录</div>
