@@ -31,9 +31,6 @@ const routes = [
       { path: 'comment', name: 'Comment', meta: { name: '评论信息' }, component: () => import('../views/manager/Comment') },
       { path: 'activitySign', name: 'ActivitySign', meta: { name: '活动报名' }, component: () => import('../views/manager/ActivitySign') },
       { path: 'reserve', name: 'Reserve', meta: { name: '服务预约' }, component: () => import('../views/manager/Reserve') },
-      { path: 'medicalExam', name: 'MedicalExam', meta: { name: '体检项目' }, component: () => import('../views/manager/MedicalExam') },
-      {path:'medicalExamSign', name: 'MedicalExamSign', meta: { name: '体检报名' }, component: () => import('../views/manager/MedicalExamSign')
-      }
     ]
   },
   {
@@ -47,9 +44,6 @@ const routes = [
       { path: 'activityDetail', name: 'FActivityDetail', component: () => import('../views/front/ActivityDetail') },
       { path: 'activity', name: 'FActivity', component: () => import('../views/front/Activity') },
       { path: 'activitySign', name: 'FActivitySign', component: () => import('../views/front/ActivitySign') },
-      { path: 'medicalExamDetail', name: 'FMedicalExamDetail', component: () => import('../views/front/MedicalExamDetail') },
-      { path: 'medicalExam', name: 'FMedicalExam', component: () => import('../views/front/MedicalExam') },
-      { path: 'medicalExamSign', name: 'FMedicalExamSign', component: () => import('../views/front/MedicalExamSign')},
       { path: 'serve', name: 'FServe', component: () => import('../views/front/Serve') },
       { path: 'reserve', name: 'FReserve', component: () => import('../views/front/Reserve') },
       { path: 'nurseHouse', name: 'FNurseHouse', component: () => import('../views/front/NurseHouse') },
