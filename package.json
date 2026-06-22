@@ -6,6 +6,7 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "schema-utils": "^4.3.2",
     "semver": "^7.7.2",
     "wangeditor": "^4.7.15"

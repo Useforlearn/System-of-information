@@ -3,7 +3,7 @@
     <div style="display: flex; grid-gap: 20px">
       <div style="flex: 1">
         <img :src="nurseHouse.img" alt="" style="width: 100%">
-     </div>
+      </div>
       <div style="flex: 1">
 
         <div style=" margin: 20px 0; display: flex; align-items: center">
@@ -51,43 +51,38 @@
 </template>
 
 <script>
+import L from 'leaflet'
 export default {
   name: "HouseDetail",
   data() {
     return {
       id: this.$route.query.id,
       nurseHouse: {},
+      map: null
     }
   },
   created() {
     this.$request.put('nurseHouse/updateCount/' + this.id).then(res => {
       this.load()
-
     })
   },
   methods: {
     load() {
       this.$request.get('/nurseHouse/selectById/' + this.id).then(res => {
         this.nurseHouse = res.data || {}
-
-        var map = new BMapGL.Map('container'); // 创建Map实例
-        map.centerAndZoom(new BMapGL.Point(this.nurseHouse.longitude, this.nurseHouse.latitude), 16); // 初始化地图,设置中心点坐标和地图级别
-        map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
-        let point = new BMapGL.Point(this.nurseHouse.longitude, this.nurseHouse.latitude)
-        let marker = new BMapGL.Marker(point);  // 创建标注
-        map.addOverlay(marker);
-        let opts = {
-          width : 300,     // 信息窗口宽度
-          height: 100,     // 信息窗口高度
-          title : this.nurseHouse.name , // 信息窗口标题
-        }
-        let infoWindow = new BMapGL.InfoWindow(
-            "<b>地址</b>：" + this.nurseHouse.address + "<br/>",
-            opts);  // 创建信息窗口对象
-
-        marker.addEventListener("click", function(){
-          map.openInfoWindow(infoWindow,point); //开启信息窗口
-        });
+        const lat = Number(this.nurseHouse.latitude)
+        const lng = Number(this.nurseHouse.longitude)
+        // Leaflet 初始化地图
+        this.map = L.map('container').setView([lat, lng], 16)
+        // 加载开源底图
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(this.map)
+        // 创建标记点
+        const marker = L.marker([lat, lng]).addTo(this.map)
+        // 弹窗内容
+        const popContent = `<b>地址</b>：${this.nurseHouse.address}<br/>`
+        marker.bindPopup(popContent).openPopup()
       })
     }
   }

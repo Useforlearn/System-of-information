@@ -111,7 +111,6 @@
         </el-form-item>
         <el-form-item label="经度" prop="longitude">
           <el-input v-model="form.longitude" placeholder="经度" style="width: 80%"></el-input>
-          <a href="https://api.map.baidu.com/lbsapi/getpoint/index.html" style="margin-left: 10px" target="_blank">坐标选择器</a>
         </el-form-item>
         <el-form-item label="纬度" prop="latitude">
           <el-input v-model="form.latitude" placeholder="纬度"></el-input>
